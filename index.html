@@ -31,17 +31,16 @@
         /* ── Desktop sidebar ── */
         .sidebar {
             width: var(--panel-w); min-width: 200px; max-width: 80vw;
-            background: var(--surface); border-left: 1px solid var(--border);
+            background: var(--surface); border-right: 1px solid var(--border);
             display: flex; flex-direction: column; overflow: hidden;
             flex-shrink: 0; position: relative; transition: width .2s;
         }
-        .sidebar.collapsed { width: 0 !important; border-left: none; }
+        .sidebar.collapsed { width: 0 !important; border-right: none; }
 
         /* drag handle */
         .resize-handle {
-            position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
-            cursor: col-resize; z-index: 20;
-            background: transparent;
+            position: absolute; right: 0; top: 0; bottom: 0; width: 5px;
+            cursor: col-resize; z-index: 20; background: transparent;
         }
         .resize-handle:hover, .resize-handle.dragging { background: var(--accent); opacity: .5; }
 
@@ -137,8 +136,6 @@
 </header>
 
 <div class="main">
-    <div id="map"></div>
-
     <div class="sidebar" id="sidebar">
         <!-- mobile drag bar -->
         <div class="drawer-bar" id="drawer-bar">
@@ -190,6 +187,8 @@
             <div id="log"></div>
         </div>
     </div>
+
+    <div id="map"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
@@ -347,7 +346,7 @@ handle.addEventListener("mousedown", e => {
 });
 document.addEventListener("mousemove", e => {
     if (!isResizing) return;
-    const delta = startX - e.clientX;
+    const delta = e.clientX - startX;
     const newW = Math.max(200, Math.min(window.innerWidth * 0.8, startW + delta));
     sidebar.style.width = newW + "px";
     document.documentElement.style.setProperty("--panel-w", newW + "px");
