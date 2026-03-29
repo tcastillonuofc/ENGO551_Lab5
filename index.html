@@ -47,13 +47,11 @@
 
         .sidebar-inner { flex: 1; overflow-y: auto; display: flex; flex-direction: column; min-width: 200px; }
 
-        /* toggle button on map edge */
         #panel-toggle {
-            position: absolute; right: 8px; top: 8px; z-index: 500;
-            background: var(--surface); border: 1px solid var(--border);
-            color: var(--text); font-family: var(--mono); font-size: 11px;
-            padding: 5px 9px; border-radius: var(--radius); cursor: pointer;
-            white-space: nowrap;
+            background: transparent; border: 1px solid var(--border);
+            color: var(--muted); font-family: var(--mono); font-size: 11px;
+            padding: 4px 9px; border-radius: var(--radius); cursor: pointer;
+            white-space: nowrap; width: auto; margin: 0; flex-shrink: 0;
         }
         #panel-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -120,7 +118,7 @@
             .drawer-bar .drawer-label { font-family: var(--mono); font-size: 11px; color: var(--muted); }
             .sidebar-inner { overflow-y: auto; }
 
-            #panel-toggle { display: none; }
+            #panel-toggle { display: none !important; }
         }
         @media (min-width: 641px) {
             .drawer-bar { display: none; }
@@ -131,6 +129,7 @@
 
 <header>
     <h1>⬡ ENGO551 · Lab 5 · IoT Geo Tracker</h1>
+    <button id="panel-toggle" title="Toggle panel">&#9776; Panel</button>
     <div id="conn-status">
         <span class="dot"></span>
         <span id="conn-label">Disconnected</span>
@@ -139,9 +138,6 @@
 
 <div class="main">
     <div id="map"></div>
-
-    <!-- desktop toggle -->
-    <button id="panel-toggle" title="Toggle panel">&#9776; Panel</button>
 
     <div class="sidebar" id="sidebar">
         <!-- mobile drag bar -->
